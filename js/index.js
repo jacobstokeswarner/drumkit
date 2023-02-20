@@ -14,6 +14,8 @@ var buttons = document.querySelectorAll("button.drum");
 for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function(){
     handlePress(this.innerHTML);
+
+    buttonAnimation(this.innerHTML);
   });
 }
 
@@ -25,6 +27,8 @@ for (var i = 0; i < buttons.length; i++) {
 // detecting keypress
 document.addEventListener("keydown", function(event){
     handlePress(event.key);
+
+    buttonAnimation(event.key);
 });
 
 //this same function can be used for keypress and also button press events
@@ -54,4 +58,17 @@ function handlePress(key){
             break;
         default:console.log(this.innerHTML);
     }
+}
+
+// animation for buttons:
+
+function buttonAnimation(currentKey){
+    var activeButton = document.querySelector("." + currentKey);
+
+    activeButton.classList.add("pressed");
+    //after delay, remove this class
+
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    }, 100);
 }
